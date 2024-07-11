@@ -1,9 +1,9 @@
 const express = require('express');
-const authController = require('../controllers/authController');
+const AuthController = require('../controllers/AuthController'); // Updated to use PascalCase
 
 const router = express.Router();
 
-router.post('/register', authController.register);
-router.post('/login', authController.login);
+router.post('/register', AuthController.register);
+router.post('/login', AuthController.login);
 
 module.exports = router;
