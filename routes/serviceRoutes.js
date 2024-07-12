@@ -1,18 +1,11 @@
-// routes/serviceRoutes.js
-const express = require('express');
+import express from 'express';
+import { getAllServices, createService, updateService, deleteService } from '../controllers/ServiceController.js';
+
 const router = express.Router();
-const ServiceController = require('../controllers/ServiceController');
 
-// GET all services
-router.get('/', ServiceController.getAllServices);
+router.get('/', getAllServices);
+router.post('/', createService);
+router.put('/:id', updateService);
+router.delete('/:id', deleteService);
 
-// POST a new service
-router.post('/', ServiceController.createService);
-
-// PUT (update) a service
-router.put('/:id', ServiceController.updateService);
-
-// DELETE a service
-router.delete('/:id', ServiceController.deleteService);
-
-module.exports = router;
+export default router;

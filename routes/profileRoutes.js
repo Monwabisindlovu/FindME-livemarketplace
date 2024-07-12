@@ -1,10 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const authMiddleware = require('../middleware/authMiddleware'); // Corrected path
+import express from 'express';
+import authMiddleware from '../middleware/authMiddleware.js';
+import { getUserProfile, updateUserProfile } from '../controllers/ProfileController.js';
 
-const { getUserProfile, updateUserProfile } = require('../controllers/ProfileController');
+const router = express.Router();
 
 router.get('/', authMiddleware, getUserProfile);
 router.put('/', authMiddleware, updateUserProfile);
 
-module.exports = router;
+export default router;

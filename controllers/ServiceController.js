@@ -1,7 +1,6 @@
-// controllers/ServiceController.js
-const Service = require('../models/Service');
+import Service from '../models/Service.js';
 
-exports.getAllServices = async (req, res, next) => {
+export const getAllServices = async (req, res, next) => {
   try {
     const services = await Service.find({});
     res.json(services);
@@ -10,7 +9,7 @@ exports.getAllServices = async (req, res, next) => {
   }
 };
 
-exports.createService = async (req, res, next) => {
+export const createService = async (req, res, next) => {
   try {
     const { name, description, price } = req.body;
     const newService = new Service({ name, description, price });
@@ -21,7 +20,7 @@ exports.createService = async (req, res, next) => {
   }
 };
 
-exports.updateService = async (req, res, next) => {
+export const updateService = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { name, description, price } = req.body;
@@ -32,7 +31,7 @@ exports.updateService = async (req, res, next) => {
   }
 };
 
-exports.deleteService = async (req, res, next) => {
+export const deleteService = async (req, res, next) => {
   try {
     const { id } = req.params;
     await Service.findByIdAndDelete(id);

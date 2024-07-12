@@ -1,5 +1,3 @@
-// errorMiddleware.js
-
 const errorMiddleware = (err, req, res, next) => {
   console.error(err.stack);
 
@@ -12,4 +10,4 @@ const errorMiddleware = (err, req, res, next) => {
   }
 };
 
-module.exports = errorMiddleware;
+export default errorMiddleware;

@@ -1,31 +1,29 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const mongoose = require('mongoose');
-require('dotenv').config();
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-const authMiddleware = require('./middleware/authMiddleware');
-const errorMiddleware = require('./middleware/errorMiddleware');
-const authRoutes = require('./routes/authRoutes');
-const serviceRoutes = require('./routes/serviceRoutes');
-const profileRoutes = require('./routes/profileRoutes');
-const reviewRoutes = require('./routes/reviewRoutes'); // Corrected import
-const incidentRoutes = require('./routes/incidentRoutes');
+import authMiddleware from './middleware/authMiddleware.js';
+import errorMiddleware from './middleware/errorMiddleware.js';
+import authRoutes from './routes/authRoutes.js';
+import serviceRoutes from './routes/serviceRoutes.js';
+import profileRoutes from './routes/profileRoutes.js';
+import reviewRoutes from './routes/reviewRoutes.js';
+import incidentRoutes from './routes/incidentRoutes.js';
+
+dotenv.config();
 
 const app = express();
 
-// Middleware to allow requests from your frontend domain
 const corsOptions = {
   origin: 'http://localhost:5173', // Replace with your frontend URL
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 app.use(cors(corsOptions));
-
-// Middleware
 app.use(bodyParser.json());
 
-// MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -33,23 +31,19 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log('MongoDB Connected'))
 .catch(err => console.log('MongoDB connection error:', err));
 
-// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/profile', profileRoutes);
-app.use('/api/reviews', reviewRoutes); // Use reviewRoutes here
+app.use('/api/reviews', reviewRoutes);
 app.use('/api/incidents', incidentRoutes);
 
-// Error Middleware
 app.use(errorMiddleware);
 
-// Example route
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

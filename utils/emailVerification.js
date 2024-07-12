@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
 const sendVerificationEmail = async (to, subject, text) => {
   const transporter = nodemailer.createTransport({
@@ -24,4 +24,4 @@ const sendVerificationEmail = async (to, subject, text) => {
   }
 };
 
-module.exports = sendVerificationEmail;
+export default sendVerificationEmail;
